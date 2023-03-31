@@ -44,8 +44,14 @@ class ProductService {
     }
   }
   
+  public async getAllProducts():Promise<IProduct[]> {
+    const allProducts = this.model.getAllProducts();
+    return allProducts;
+  }
+
   public async createProduct(product: IProduct): Promise<IProduct> {
-    return this.model.createProduct(product);
+    const newProduct = this.model.createProduct(product);
+    return newProduct;
   }
 }
 
