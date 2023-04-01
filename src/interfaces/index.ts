@@ -18,3 +18,8 @@ export interface IProduct {
   amount: string;
   orderId?: number;
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
