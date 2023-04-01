@@ -10,7 +10,7 @@ class OrderService {
   }
 
   public async getAllOrders(): Promise<IOrder[]> {
-    const allOrders = this.model.getAllOrders();
+    const allOrders = await this.model.getAllOrders();
     return allOrders;
   }
 }
