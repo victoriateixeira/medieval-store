@@ -1,8 +1,8 @@
 export interface IUser {
   id?: number;
   username: string;
-  vocation: string;
-  level: number;
+  vocation?: string;
+  level?: number;
   password?: string;
 }
 
@@ -22,4 +22,8 @@ export interface IProduct {
 export interface ILogin {
   email: string;
   password: string;
+}
+export interface IServiceReturn {
+  type: null | number;
+  message: string;
 }

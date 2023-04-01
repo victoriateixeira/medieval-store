@@ -18,9 +18,9 @@ export default class UserModel {
     return { id: insertId, ...userData };
   }
 
-  public async login(loginData: ILogin): Promise<IUser> {
+  public async login(loginData: ILogin): Promise<IUser[]> {
     const { email } = loginData;
-    const [rows] = await this.connection.execute<RowDataPacket[] & IUser>(
+    const [rows] = await this.connection.execute<RowDataPacket[] & IUser[]>(
       'SELECT* FROM users WHERE email =?', 
       [email],
     ); 

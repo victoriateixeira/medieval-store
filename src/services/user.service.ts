@@ -1,7 +1,7 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
-import { IUser } from '../interfaces';
+import { ILogin, IServiceReturn, IUser } from '../interfaces';
 
 const secret = process.env.JWT_SECRET || 'SecretFiller';
 
@@ -36,6 +36,16 @@ class UserService {
     const userWithoutPassword: IUser = { id, username, vocation, level };
     const token = UserService.createToken(userWithoutPassword);
     return token;
+  }
+
+  public async loginUser(loginData:ILogin):Promise<IServiceReturn> {
+    const users = await this.model.login(loginData);
+    if (users.length === 0 || users[0].password !== loginData.password) {
+      return { type: 401, message: 'Username or password invalid' };
+    }
+    const payload = { id: users[0].id, username: users[0].username };
+    const token = UserService.createToken(payload);
+    return { type: null, message: token };
   }
 }
 
