@@ -17,7 +17,7 @@ class UserService {
     this.model = new UserModel(connection);
   }
 
-  static createToken = (data: IUser) => jwt.sign(data, secret, JWT_CONFIG);
+  static createToken = (data: IUser) => jwt.sign({ data }, secret, JWT_CONFIG);
 
   // const verifyToken = (token) => jwt.verify(token, secret);
 
@@ -32,8 +32,10 @@ class UserService {
 
   public async createUser(userData: IUser): Promise<string> {
     const newUser = await this.model.createUser(userData);
-    const { password: _, ...userWithoutPassword } = newUser;
+    const { id, username, vocation, level } = newUser;
+    const userWithoutPassword: IUser = { id, username, vocation, level };
     const token = UserService.createToken(userWithoutPassword);
+    console.log(token, 'TOKEN');
     return token;
   }
 }
