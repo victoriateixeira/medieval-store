@@ -21,11 +21,11 @@ GROUP BY c.order_id`,
     return result as IOrder[];
   }
 
-  public async createOrder(id: number): Promise<IOrder> {
+  public async createOrder(id: number): Promise<number> {
     const [{ insertId }] = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO Trybesmith.orders (user_id) VALUES(?)',
       [id],
     );
-    return { id: insertId, userId: id };
+    return insertId;
   }
 }

@@ -74,10 +74,6 @@ class ProductService {
     
     return { type: 201, message: newProduct };
   }
-
-  public async addOrderToProduct(productsIds: number[]): Promise<> {
-    
-  }
 }
 
 export default ProductService;
