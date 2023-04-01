@@ -12,7 +12,7 @@ class ProductController {
   public createProduct = async (req: Request, res: Response) => {
     const product = req.body;
     const productCreated = await this.productService.createProduct(product);
-    return res.status(201).json(productCreated);
+    return res.status(productCreated.type).json(productCreated.message);
   };
 }
 
