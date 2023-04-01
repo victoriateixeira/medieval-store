@@ -20,7 +20,7 @@ export interface IProduct {
 }
 
 export interface ILogin {
-  email: string;
+  username: string;
   password: string;
 }
 export interface IServiceReturn {

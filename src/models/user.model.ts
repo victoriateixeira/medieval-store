@@ -1,4 +1,4 @@
-import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
+import { Pool, ResultSetHeader } from 'mysql2/promise';
 import { ILogin, IUser } from '../interfaces';
 
 export default class UserModel {
@@ -18,12 +18,12 @@ export default class UserModel {
     return { id: insertId, ...userData };
   }
 
-  public async login(loginData: ILogin): Promise<IUser[]> {
-    const { email } = loginData;
-    const [rows] = await this.connection.execute<RowDataPacket[] & IUser[]>(
-      'SELECT* FROM users WHERE email =?', 
-      [email],
+  public async getUser(loginData: ILogin): Promise<IUser[] | []> {
+    const { username } = loginData;
+    const [rows] = await this.connection.execute(
+      'SELECT * FROM Trybesmith.users WHERE username =?;', 
+      [username],
     ); 
-    return rows;
+    return rows as IUser[] | [];
   }
 }

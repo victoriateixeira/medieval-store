@@ -4,7 +4,6 @@ import UserModel from '../models/user.model';
 import { ILogin, IServiceReturn, IUser } from '../interfaces';
 
 const secret = process.env.JWT_SECRET || 'SecretFiller';
-
 const JWT_CONFIG: SignOptions = {
   algorithm: 'HS256',
   expiresIn: '7d',
@@ -39,10 +38,11 @@ class UserService {
   }
 
   public async loginUser(loginData:ILogin):Promise<IServiceReturn> {
-    const users = await this.model.login(loginData);
-    if (users.length === 0 || users[0].password !== loginData.password) {
-      return { type: 401, message: 'Username or password invalid' };
+    const users = await this.model.getUser(loginData);
+    if (users.length === 0 || users[0].password !== loginData.password) { 
+      return { type: 401, message: { message: 'Username or password invalid' } }; 
     }
+  
     const payload: IUser = { id: users[0].id, username: users[0].username };
     const token = UserService.createToken(payload);
     return { type: 200, message: { token } };
