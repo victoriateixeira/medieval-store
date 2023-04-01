@@ -9,6 +9,7 @@ const JWT_CONFIG: SignOptions = {
   expiresIn: '7d',
 };
 
+const userProperties = ['username', 'vocation', 'level', 'password'];
 class UserService {
   public model: UserModel;
 
