@@ -69,7 +69,9 @@ class ProductService {
   public async createProduct(product: IProduct): Promise<IServiceReturn> {
     const isValidProduct = ProductService.validationProduct(product);
     if (isValidProduct) { return isValidProduct; }
-    const newProduct = this.model.createProduct(product);
+    
+    const newProduct = await this.model.createProduct(product);
+    
     return { type: 201, message: newProduct };
   }
 }

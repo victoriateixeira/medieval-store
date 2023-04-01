@@ -8,7 +8,7 @@ const JWT_CONFIG: SignOptions = {
   expiresIn: '7d',
 };
 
-export const createToken = (data: IUser) => jwt.sign(data, secret, JWT_CONFIG);
+export const createToken = (data: IUser) => jwt.sign({ data }, secret, JWT_CONFIG);
 
 // const verifyToken = (token) => jwt.verify(token, secret);
 
