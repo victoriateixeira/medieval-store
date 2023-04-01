@@ -9,6 +9,7 @@ export interface IUser {
 export interface IOrder {
   id: number;
   userId: number;
+  productsIds?: number[];
 }
 
 export interface IProduct {
