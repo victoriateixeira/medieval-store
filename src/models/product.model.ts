@@ -24,4 +24,10 @@ export default class ProductModel {
     );
     return { id: insertId, ...product };
   }
+
+  public async addOrderToProduct(orderId: number, productId: number): Promise<void> {
+    await this.connection.execute(`UPDATE Trybesmith.orders
+      SET order_id = ?
+      WHERE id =  ?`, [orderId, productId]);
+  }
 }
