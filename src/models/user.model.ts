@@ -1,5 +1,5 @@
-import { Pool, ResultSetHeader } from 'mysql2/promise';
-import { IUser } from '../interfaces';
+import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
+import { ILogin, IUser } from '../interfaces';
 
 export default class UserModel {
   public connection: Pool;
@@ -16,5 +16,14 @@ export default class UserModel {
       [username, vocation, level, password],
     );
     return { id: insertId, ...userData };
+  }
+
+  public async login(loginData: ILogin): Promise<IUser> {
+    const { email } = loginData;
+    const [rows] = await this.connection.execute<RowDataPacket[] & IUser>(
+      'SELECT* FROM users WHERE email =?', 
+      [email],
+    ); 
+    return rows;
   }
 }
