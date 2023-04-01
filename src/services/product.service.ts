@@ -44,20 +44,20 @@ class ProductService {
   static validationProduct(product: IProduct): void | IServiceReturn {
     let [valid, property] = ProductService.validateProperties(product);
     if (!valid) {
-      return { type: 400, message: { message: `${property} is required` } };
+      return { type: 400, message: { message: `"${property}" is required` } };
     }
 
     [valid, property] = ProductService.validateValuesType(product);
   
     if (!valid) {
-      return { type: 422, message: { message: `${property} must be a string` } };
+      return { type: 422, message: { message: `"${property}" must be a string` } };
     }
 
     [valid, property] = ProductService.validateValuesLength(product);
   
     if (!valid) {
       return { type: 422,
-        message: { message: `${property} length must be at least 3 characters long` } };
+        message: { message: `"${property}" length must be at least 3 characters long` } };
     }
   }
   
