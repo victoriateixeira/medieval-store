@@ -1,20 +1,19 @@
-// const { verifyToken } = require('../auth/authFunctions');
-// const { userService } = require('../services');
+import { Request, Response, NextFunction } from 'express';
 
-const validateToken = async (req, res, next) => {
+import { verifyToken } from '../auth/authFunctions';
+
+export const validateToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
       return res.status(401).json({ message: 'Token not found' });
     }
-    const { data: { id } } = verifyToken(authorization);
-    const user = await userService.getById(id);
-    if (!user) {
-      return res.status(401).json({ message: 'Expired or invalid token' });
+  
+    const isValid = verifyToken(authorization);
+    if (!isValid) {
+      return res.status(401).json({ message: 'Invalid token' });
     }
-    console.log(user.dataValues, 'VALIDATETOKEN');
-    req.user = user.dataValues;
-
+   
     return next();
   } catch (error) {
     res.status(401).json({
@@ -23,4 +22,4 @@ const validateToken = async (req, res, next) => {
   }
 };
 
-module.exports = validateToken;
+export default validateToken;
