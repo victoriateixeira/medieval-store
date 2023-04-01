@@ -3,7 +3,7 @@ import { JwtPayload } from 'jsonwebtoken';
 
 import { verifyToken } from '../auth/authFunctions';
 
-export const validateToken = async (req: Request, res: Response, next: NextFunction) => {
+const validateToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
