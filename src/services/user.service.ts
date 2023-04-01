@@ -35,7 +35,6 @@ class UserService {
     const { id, username, vocation, level } = newUser;
     const userWithoutPassword: IUser = { id, username, vocation, level };
     const token = UserService.createToken(userWithoutPassword);
-    console.log(token, 'TOKEN');
     return token;
   }
 }
