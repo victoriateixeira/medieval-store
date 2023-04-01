@@ -24,6 +24,6 @@ export interface ILogin {
   password: string;
 }
 export interface IServiceReturn {
-  type: null | number;
-  message: string;
+  type: number;
+  message: string | object;
 }

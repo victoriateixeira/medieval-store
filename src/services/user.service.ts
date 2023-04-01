@@ -43,9 +43,9 @@ class UserService {
     if (users.length === 0 || users[0].password !== loginData.password) {
       return { type: 401, message: 'Username or password invalid' };
     }
-    const payload = { id: users[0].id, username: users[0].username };
+    const payload: IUser = { id: users[0].id, username: users[0].username };
     const token = UserService.createToken(payload);
-    return { type: null, message: token };
+    return { type: 200, message: { token } };
   }
 }
 
