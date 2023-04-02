@@ -26,7 +26,7 @@ export default class ProductModel {
   }
 
   public async addOrderToProduct(orderId: number, productId: number): Promise<void> {
-    await this.connection.execute(`UPDATE Trybesmith.orders
+    await this.connection.execute(`UPDATE Trybesmith.products
       SET order_id = ?
       WHERE id =  ?`, [orderId, productId]);
   }

@@ -25,8 +25,8 @@ class OrderController {
     const { authorization } = req.headers;
     
     const isValid = verifyToken(authorization as string) as JwtPayload;
-    const [{ id }] = await this.userModel.getUser(isValid.name);
-
+    const [user] = await this.userModel.getUser(isValid.data);
+    const { id } = user;
     const newOrder = await this.orderService.createOrder(id as number, productsIds);
     return res.status(201).json(newOrder);
   };
